@@ -1,0 +1,10 @@
+{
+    "name": "acadelib/laravel-modules",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Samuel Maurice",
+            "email": "samuel@acadelib.com"
+        }
+    ]
+}
