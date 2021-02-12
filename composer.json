@@ -1,5 +1,5 @@
 {
-    "name": "acadelib/laravel-modules",
+    "name": "acadelib/modularity",
     "license": "MIT",
     "authors": [
         {
@@ -13,16 +13,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Acadelib\\Modules\\": "src/"
+            "Acadelib\\Modularity\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Acadelib\\Modules\\ModuleServiceProvider"
+                "Acadelib\\Modularity\\ModularityServiceProvider"
             ],
             "aliases": {
-                "Module": "Acadelib\\Modules\\Facades\\Module"
+                "Module": "Acadelib\\Modularity\\Facades\\Module"
             }
         }
     }

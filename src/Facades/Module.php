@@ -1,6 +1,6 @@
 <?php
 
-namespace Acadelib\Modules\Facades;
+namespace Acadelib\Modularity\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -13,6 +13,6 @@ class Module extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'module';
+        return 'modularity';
     }
 }

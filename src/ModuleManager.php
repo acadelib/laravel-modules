@@ -1,6 +1,6 @@
 <?php
 
-namespace Acadelib\Modules;
+namespace Acadelib\Modularity;
 
 class ModuleManager
 {

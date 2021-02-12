@@ -1,10 +1,10 @@
 <?php
 
-namespace Acadelib\Modules;
+namespace Acadelib\Modularity;
 
 use Illuminate\Support\ServiceProvider;
 
-class ModuleServiceProvider extends ServiceProvider
+class ModularityServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -13,7 +13,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('module', function () {
+        $this->app->singleton('modularity', function () {
             return new ModuleManager();
         });
     }
