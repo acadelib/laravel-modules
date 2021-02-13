@@ -2,7 +2,7 @@
 
 namespace Acadelib\Modularity;
 
-use Acadelib\Modularity\Console\ModuleMakeCommand;
+use Acadelib\Modularity\Console\Commands\MakeCommand;
 use Illuminate\Support\ServiceProvider;
 
 class ModularityServiceProvider extends ServiceProvider
@@ -28,7 +28,7 @@ class ModularityServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                ModuleMakeCommand::class,
+                MakeCommand::class,
             ]);
         }
     }

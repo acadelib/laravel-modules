@@ -1,11 +1,11 @@
 <?php
 
-namespace Acadelib\Modularity\Console;
+namespace Acadelib\Modularity\Console\Commands;
 
-use Acadelib\Modularity\ModuleCreator;
+use Acadelib\Modularity\Console\ModuleCreator;
 use Illuminate\Console\Command;
 
-class ModuleMakeCommand extends Command
+class MakeCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -31,7 +31,7 @@ class ModuleMakeCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param  \Acadelib\Modularity\ModuleCreator  $creator
+     * @param  \Acadelib\Modularity\Console\ModuleCreator  $creator
      * @return void
      */
     public function __construct(ModuleCreator $creator)
