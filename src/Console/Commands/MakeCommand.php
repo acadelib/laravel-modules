@@ -24,7 +24,7 @@ class MakeCommand extends Command
     /**
      * The module creator instance.
      *
-     * @var \Acadelib\Modularity\ModuleCreator
+     * @var \Acadelib\Modularity\Console\ModuleCreator
      */
     protected $creator;
 
