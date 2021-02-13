@@ -105,7 +105,7 @@ class ModuleCreator
      */
     protected function getPath($name)
     {
-        return base_path('modules').'/'.$name;
+        return config('modularity.module_path').'/'.$name;
     }
 
     /**

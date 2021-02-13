@@ -14,6 +14,8 @@ class ModularityServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/modularity.php', 'modularity');
+
         $this->app->singleton('modularity', function () {
             return new ModuleManager();
         });
@@ -27,6 +29,10 @@ class ModularityServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/modularity.php' => config_path('modularity.php'),
+            ], 'modularity-config');
+
             $this->commands([
                 MakeCommand::class,
             ]);
