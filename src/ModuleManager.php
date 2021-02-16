@@ -34,8 +34,8 @@ class ModuleManager
         $modules = [];
 
         foreach ($this->getDirectories() as $directory) {
-            $manifest = json_decode($this->files->get($directory.'/module.json'));
-            $modules[] = $manifest->name;
+            $manifest = $this->getManifest($directory);
+            $modules[$manifest->name] = new Module($manifest->name, $directory);
         }
 
         return $modules;
@@ -49,5 +49,16 @@ class ModuleManager
     protected function getDirectories()
     {
         return $this->files->directories(config('modularity.module_path'));
+    }
+
+    /**
+     * Get the manifest for the given module path.
+     *
+     * @param  string  $directory
+     * @return mixed
+     */
+    protected function getManifest($directory)
+    {
+        return json_decode($this->files->get($directory.'/module.json'));
     }
 }

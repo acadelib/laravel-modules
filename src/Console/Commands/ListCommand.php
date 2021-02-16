@@ -2,6 +2,7 @@
 
 namespace Acadelib\Modularity\Console\Commands;
 
+use Acadelib\Modularity\Module;
 use Acadelib\Modularity\ModuleManager;
 use Illuminate\Console\Command;
 
@@ -65,9 +66,9 @@ class ListCommand extends Command
      */
     protected function getModules()
     {
-        return collect($this->manager->scan())->map(function ($module) {
+        return collect($this->manager->scan())->map(function (Module $module) {
             return [
-                'name' => $module,
+                'name' => $module->getName(),
             ];
         })->toArray();
     }
