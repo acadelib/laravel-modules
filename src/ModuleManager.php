@@ -55,10 +55,10 @@ class ModuleManager
      * Get the manifest for the given module path.
      *
      * @param  string  $directory
-     * @return mixed
+     * @return \Acadelib\Modularity\Manifest
      */
     protected function getManifest($directory)
     {
-        return json_decode($this->files->get($directory.'/module.json'));
+        return new Manifest($this->files, $directory);
     }
 }

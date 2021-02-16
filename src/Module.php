@@ -9,14 +9,14 @@ class Module
      *
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * The module path.
      *
      * @var string
      */
-    private $path;
+    protected $path;
 
     /**
      * Create a new module instance.
