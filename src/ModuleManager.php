@@ -25,20 +25,60 @@ class ModuleManager
     }
 
     /**
-     * Get all modules.
+     * Scan module path to detect modules.
      *
      * @return array
      */
-    public function scan()
+    protected function scan()
     {
         $modules = [];
 
         foreach ($this->getDirectories() as $directory) {
             $manifest = $this->getManifest($directory);
-            $modules[$manifest->name] = new Module($manifest->name, $directory);
+            $modules[$manifest->name] = new Module($manifest);
         }
 
         return $modules;
+    }
+
+    /**
+     * Get all modules.
+     *
+     * @return array
+     */
+    public function all()
+    {
+        return $this->scan();
+    }
+
+    /**
+     * Enable the given module.
+     *
+     * @param  string  $name
+     * @return void
+     */
+    public function enable($name)
+    {
+        foreach ($this->scan() as $module) {
+            if ($module->getName() == $name) {
+                $module->enable();
+            }
+        }
+    }
+
+    /**
+     * Disable the given module.
+     *
+     * @param  string  $name
+     * @return void
+     */
+    public function disable($name)
+    {
+        foreach ($this->scan() as $module) {
+            if ($module->getName() == $name) {
+                $module->disable();
+            }
+        }
     }
 
     /**

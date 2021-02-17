@@ -5,30 +5,21 @@ namespace Acadelib\Modularity;
 class Module
 {
     /**
-     * The module name.
+     * The manifest.
      *
-     * @var string
+     * @var \Acadelib\Modularity\Manifest
      */
-    protected $name;
-
-    /**
-     * The module path.
-     *
-     * @var string
-     */
-    protected $path;
+    protected $manifest;
 
     /**
      * Create a new module instance.
      *
-     * @param  string  $name
-     * @param  string  $path
+     * @param  \Acadelib\Modularity\Manifest  $manifest
      * @return void
      */
-    public function __construct($name, $path)
+    public function __construct($manifest)
     {
-        $this->name = $name;
-        $this->path = $path;
+        $this->manifest = $manifest;
     }
 
     /**
@@ -38,6 +29,36 @@ class Module
      */
     public function getName()
     {
-        return $this->name;
+        return $this->manifest->name;
+    }
+
+    /**
+     * Determine if the module is enabled or not.
+     *
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->manifest->enable;
+    }
+
+    /**
+     * Enable the module.
+     *
+     * @return void
+     */
+    public function enable()
+    {
+        $this->manifest->enable = true;
+    }
+
+    /**
+     * Disable the module.
+     *
+     * @return void
+     */
+    public function disable()
+    {
+        $this->manifest->enable = false;
     }
 }

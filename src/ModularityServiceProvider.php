@@ -2,6 +2,8 @@
 
 namespace Acadelib\Modularity;
 
+use Acadelib\Modularity\Console\Commands\DisableCommand;
+use Acadelib\Modularity\Console\Commands\EnableCommand;
 use Acadelib\Modularity\Console\Commands\ListCommand;
 use Acadelib\Modularity\Console\Commands\MakeCommand;
 use Illuminate\Support\ServiceProvider;
@@ -35,6 +37,8 @@ class ModularityServiceProvider extends ServiceProvider
             ], 'modularity-config');
 
             $this->commands([
+                DisableCommand::class,
+                EnableCommand::class,
                 ListCommand::class,
                 MakeCommand::class,
             ]);

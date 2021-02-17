@@ -42,13 +42,23 @@ class Manifest
     }
 
     /**
-     * Convert the manifest's attributes to an array
+     * Save the current state of the manifest.
      *
-     * @return array
+     * @return void
      */
-    protected function getAttributes()
+    protected function save()
     {
-        return json_decode($this->getManifest(), true);
+        $this->files->put($this->getPath(), json_encode($this->attributes, JSON_PRETTY_PRINT));
+    }
+
+    /**
+     * Get the path.
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path.'/module.json';
     }
 
     /**
@@ -58,7 +68,17 @@ class Manifest
      */
     protected function getManifest()
     {
-        return $this->files->get($this->path.'/module.json');
+        return $this->files->get($this->getPath());
+    }
+
+    /**
+     * Convert the manifest's attributes to an array
+     *
+     * @return array
+     */
+    protected function getAttributes()
+    {
+        return json_decode($this->getManifest(), true);
     }
 
     /**
@@ -70,5 +90,18 @@ class Manifest
     public function __get($key)
     {
         return $this->attributes[$key];
+    }
+
+    /**
+     * Dynamically set an attribute on the manifest.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return void
+     */
+    public function __set($key, $value)
+    {
+        $this->attributes[$key] = $value;
+        $this->save();
     }
 }

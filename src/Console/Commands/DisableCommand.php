@@ -2,25 +2,24 @@
 
 namespace Acadelib\Modularity\Console\Commands;
 
-use Acadelib\Modularity\Module;
 use Acadelib\Modularity\ModuleManager;
 use Illuminate\Console\Command;
 
-class ListCommand extends Command
+class DisableCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'module:list';
+    protected $signature = 'module:disable {name : The name of the module}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'List all registered modules';
+    protected $description = 'Disable the given module';
 
     /**
      * The module manager instance.
@@ -28,13 +27,6 @@ class ListCommand extends Command
      * @var \Acadelib\Modularity\ModuleManager
      */
     protected $manager;
-
-    /**
-     * The table headers for the command.
-     *
-     * @var string[]
-     */
-    protected $headers = ['Name', 'Status'];
 
     /**
      * Create a new command instance.
@@ -56,21 +48,6 @@ class ListCommand extends Command
      */
     public function handle()
     {
-        $this->table($this->headers, $this->getModules());
-    }
-
-    /**
-     * Compile the modules into a displayable format.
-     *
-     * @return array
-     */
-    protected function getModules()
-    {
-        return collect($this->manager->all())->map(function (Module $module) {
-            return [
-                'name' => $module->getName(),
-                'status' => $module->isEnabled() ? 'Enabled' : 'Disabled',
-            ];
-        })->toArray();
+        $this->manager->disable($this->argument('name'));
     }
 }
