@@ -2,7 +2,9 @@
 
 namespace Acadelib\Modularity;
 
+use Acadelib\Modularity\Exceptions\ModuleNotFoundException;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 
 class ModuleManager
 {
@@ -42,6 +44,25 @@ class ModuleManager
     }
 
     /**
+     * Find a module by its name.
+     *
+     * @param  string  $name
+     * @return \Acadelib\Modularity\Module
+     *
+     * @throws \Acadelib\Modularity\Exceptions\ModuleNotFoundException
+     */
+    protected function findOrFail($name)
+    {
+        foreach ($this->scan() as $module) {
+            if ($module->getName() == Str::kebab($name)) {
+                return $module;
+            }
+        }
+
+        throw new ModuleNotFoundException("The module [{$name}] does not exist.");
+    }
+
+    /**
      * Get all modules.
      *
      * @return array
@@ -56,14 +77,12 @@ class ModuleManager
      *
      * @param  string  $name
      * @return void
+     *
+     * @throws \Acadelib\Modularity\Exceptions\ModuleNotFoundException
      */
     public function enable($name)
     {
-        foreach ($this->scan() as $module) {
-            if ($module->getName() == $name) {
-                $module->enable();
-            }
-        }
+        $this->findOrFail($name)->enable();
     }
 
     /**
@@ -71,14 +90,12 @@ class ModuleManager
      *
      * @param  string  $name
      * @return void
+     *
+     * @throws \Acadelib\Modularity\Exceptions\ModuleNotFoundException
      */
     public function disable($name)
     {
-        foreach ($this->scan() as $module) {
-            if ($module->getName() == $name) {
-                $module->disable();
-            }
-        }
+        $this->findOrFail($name)->disable();
     }
 
     /**
@@ -94,11 +111,11 @@ class ModuleManager
     /**
      * Get the manifest for the given module path.
      *
-     * @param  string  $directory
+     * @param  string  $path
      * @return \Acadelib\Modularity\Manifest
      */
-    protected function getManifest($directory)
+    protected function getManifest($path)
     {
-        return new Manifest($this->files, $directory);
+        return new Manifest($this->files, $path.'/module.json');
     }
 }

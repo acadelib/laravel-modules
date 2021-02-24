@@ -58,7 +58,19 @@ class Manifest
      */
     public function getPath()
     {
-        return $this->path.'/module.json';
+        return $this->path;
+    }
+
+    /**
+     * Enable or disable the module.
+     *
+     * @param  bool  $enable
+     * @return void
+     */
+    public function setEnable($enable)
+    {
+        $this->attributes['enable'] = $enable;
+        $this->save();
     }
 
     /**
@@ -90,18 +102,5 @@ class Manifest
     public function __get($key)
     {
         return $this->attributes[$key];
-    }
-
-    /**
-     * Dynamically set an attribute on the manifest.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return void
-     */
-    public function __set($key, $value)
-    {
-        $this->attributes[$key] = $value;
-        $this->save();
     }
 }

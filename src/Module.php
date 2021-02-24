@@ -49,7 +49,7 @@ class Module
      */
     public function enable()
     {
-        $this->manifest->enable = true;
+        $this->manifest->setEnable(true);
     }
 
     /**
@@ -59,6 +59,6 @@ class Module
      */
     public function disable()
     {
-        $this->manifest->enable = false;
+        $this->manifest->setEnable(false);
     }
 }

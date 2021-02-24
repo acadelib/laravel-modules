@@ -83,7 +83,7 @@ class ModuleCreator
      */
     protected function populateStub($name, $stub)
     {
-        return str_replace('{{ name }}', $name, $stub);
+        return str_replace('{{ name }}', Str::kebab($name), $stub);
     }
 
     /**

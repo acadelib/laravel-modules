@@ -5,6 +5,7 @@ namespace Acadelib\Modularity\Console\Commands;
 use Acadelib\Modularity\Module;
 use Acadelib\Modularity\ModuleManager;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class ListCommand extends Command
 {
@@ -68,7 +69,7 @@ class ListCommand extends Command
     {
         return collect($this->manager->all())->map(function (Module $module) {
             return [
-                'name' => $module->getName(),
+                'name' => Str::studly($module->getName()),
                 'status' => $module->isEnabled() ? 'Enabled' : 'Disabled',
             ];
         })->toArray();
