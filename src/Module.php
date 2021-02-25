@@ -23,6 +23,16 @@ class Module
     }
 
     /**
+     * Get the module path.
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return dirname($this->manifest->getPath());
+    }
+
+    /**
      * Get the module name.
      *
      * @return string

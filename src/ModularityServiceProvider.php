@@ -6,6 +6,7 @@ use Acadelib\Modularity\Console\Commands\DisableCommand;
 use Acadelib\Modularity\Console\Commands\EnableCommand;
 use Acadelib\Modularity\Console\Commands\ListCommand;
 use Acadelib\Modularity\Console\Commands\MakeCommand;
+use Acadelib\Modularity\Providers\BootstrapServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class ModularityServiceProvider extends ServiceProvider
@@ -22,6 +23,8 @@ class ModularityServiceProvider extends ServiceProvider
         $this->app->singleton('modularity', function ($app) {
             return new ModuleManager($app->make('files'));
         });
+
+        $this->app->register(BootstrapServiceProvider::class);
     }
 
     /**
