@@ -40,8 +40,7 @@ class ModuleCreator
         $path = $this->getPath($name);
 
         $this->ensureModuleDoesntAlreadyExist($name, $path);
-
-        $this->files->makeDirectory($path, 0755, true);
+        $this->createDefaultStructure($path);
 
         $this->files->put(
             $path.'/module.json', $this->populateStub($name, $this->getStub())
@@ -62,6 +61,42 @@ class ModuleCreator
         if ($this->files->exists($path)) {
             throw new InvalidArgumentException("The module [{$name}] already exists.");
         }
+    }
+
+    /**
+     * Generate the default structure for a module.
+     *
+     * @param  string  $path
+     * @return void
+     */
+    protected function createDefaultStructure($path)
+    {
+        foreach ($this->getFolders() as $folder) {
+            $this->files->makeDirectory($path.'/'.$folder, 0755, true);
+        }
+    }
+
+    /**
+     * Get the default structure for a module.
+     *
+     * @return string[]
+     */
+    protected function getFolders()
+    {
+        return [
+            'Console',
+            'Database/Migrations',
+            'Database/Seeders',
+            'Http/Controllers',
+            'Http/Middleware',
+            'Http/Requests',
+            'Models',
+            'Policies',
+            'Providers',
+            'Resources/Views',
+            'Routes',
+            'Tests',
+        ];
     }
 
     /**
