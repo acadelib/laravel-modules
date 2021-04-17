@@ -25,7 +25,7 @@ class BootstrapServiceProvider extends ServiceProvider
     public function boot()
     {
         foreach ($this->app->make('modularity')->all() as $module) {
-            if ($module->isEnabled()) {
+            if ($module->isEnabled() && $module->isAutoloaded()) {
                 $this->loadRoutesFrom($module->getPath().'/Routes/web.php');
                 $this->loadMigrationsFrom($module->getPath().'/Database/Migrations');
                 $this->loadTranslationsFrom($module->getPath().'/Resources/Lang', $module->getName());

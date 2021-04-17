@@ -43,6 +43,16 @@ class Module
     }
 
     /**
+     * Determine if the module is autoloaded or not.
+     *
+     * @return bool
+     */
+    public function isAutoloaded()
+    {
+        return $this->manifest->autoload;
+    }
+
+    /**
      * Determine if the module is enabled or not.
      *
      * @return bool
