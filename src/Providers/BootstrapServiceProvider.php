@@ -10,9 +10,18 @@ class BootstrapServiceProvider extends ServiceProvider
      * Register any application services.
      *
      * @return void
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function register()
     {
+        foreach ($this->app->make('modularity')->all() as $module) {
+            if ($module->isEnabled()) {
+                foreach ($module->getProviders() as $provider) {
+                    $this->app->register($provider);
+                }
+            }
+        }
     }
 
     /**

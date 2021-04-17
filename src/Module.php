@@ -43,6 +43,16 @@ class Module
     }
 
     /**
+     * Get the module providers.
+     *
+     * @return array
+     */
+    public function getProviders()
+    {
+        return $this->manifest->providers;
+    }
+
+    /**
      * Determine if the module is autoloaded or not.
      *
      * @return bool

@@ -1,5 +1,6 @@
 {
     "name": "{{ name }}",
     "enable": true,
-    "autoload": true
+    "autoload": true,
+    "providers": []
 }
