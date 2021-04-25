@@ -1,5 +1,6 @@
 {
-    "name": "acadelib/modularity",
+    "name": "acadelib/laravel-modularity",
+    "description": "Module management package for Laravel",
     "license": "MIT",
     "authors": [
         {
